@@ -5,52 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SmartPrint Hub</title>
     <link rel="manifest" href="manifest.json">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>SmartPrint.</h1>
-            <p>Solusi Cetak Label Marketplace</p>
-        </header>
-
-        <button class="btn btn-paste" onclick="pasteAndParse()">
-            <span>📋</span> Tempel Data Marketplace
-        </button>
-
-        <div id="printArea" class="w58 theme-standard">
-            <div class="label-header">Preview Label</div>
-            <div id="labelContent" class="label-body">
-                <p style="font-size: 0.7rem; margin:0;">PENERIMA:</p>
-                <b id="prevNama">-</b>
-                <p id="prevTelp">-</p>
-                <hr style="border:1px dashed #ccc">
-                <p id="prevAlamat" class="address-box">-</p>
+        <header><h1>SmartPrint<span>.</span></h1></header>
+        <button class="btn btn-green" onclick="pasteAndParse()">📋 Tempel Data Marketplace</button>
+        
+        <div id="printArea" class="w58">
+            <div id="labelPreview" class="label-body">
+                <p class="small">PENERIMA:</p>
+                <b id="prevNama">-</b><p id="prevTelp">-</p>
+                <hr><p id="prevAlamat" class="address-box">-</p>
+                <div style="text-align:center; margin-top:10px;"><svg id="barcode"></svg></div>
             </div>
-            <canvas id="pdfCanvas" style="display:none;"></canvas>
         </div>
 
         <div class="card">
             <select id="sizeSelect" onchange="updatePaperSize()">
-                <option value="w58">Standard 58mm</option>
-                <option value="w80">Medium 80mm</option>
-                <option value="w100">Marketplace 100mm</option>
+                <option value="w58">Thermal 58mm</option>
+                <option value="w80">Thermal 80mm</option>
+                <option value="w100">Label 100mm</option>
             </select>
-            <input type="text" id="nama" placeholder="Nama Lengkap" oninput="sync()">
-            <input type="text" id="telp" placeholder="Nomor HP" oninput="sync()">
-            <textarea id="alamat" rows="3" placeholder="Alamat Lengkap" oninput="sync()"></textarea>
-        </div>
-
-        <div class="grid-cols">
-            <button class="btn btn-blue" onclick="connectBT()">🌐 Bluetooth</button>
-            <button class="btn btn-blue" onclick="connectUSB()">🔌 USB/OTG</button>
+            <input type="text" id="nama" placeholder="Nama" oninput="sync()">
+            <input type="text" id="telp" placeholder="No HP/Resi" oninput="sync()">
+            <textarea id="alamat" rows="3" placeholder="Alamat" oninput="sync()"></textarea>
         </div>
         
-        <button class="btn btn-print" onclick="printLabel()">
-            <span>⚡</span> CETAK SEKARANG
-        </button>
+        <button class="btn btn-blue" onclick="connectBT()">🌐 Konek Bluetooth</button>
+        <button class="btn btn-dark" onclick="printLabel()">⚡ CETAK SEKARANG</button>
     </div>
     <script src="script.js"></script>
 </body>
